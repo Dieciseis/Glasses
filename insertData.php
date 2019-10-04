@@ -12,8 +12,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$tags = explode(",",$tid);
-$size = count($tags);
+
 $sql = "SELECT cid FROM `tag_tie` WHERE tid=".$tags[0];
 for($k = 1;$k<$size;$k++){
     $sql = $sql." OR tid=".$tags[$k];

@@ -1,10 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>上传照片</title>
+    <title>数据录入</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<form action="http://www.deepbluecape.ink/glasses/back/insertData.php" method="post" role="form">
+<div class="row">
+    <div id="photoUpload" class="col-md-4">
+        <div class="form-group">
+        <input type="file" id="upLoadImage"><label for="upLoadImage">上传图片</label>
+    <!--留空的上传图片位---->
 
+        <label for="left_ear">左耳</label><input type="text" id="left_ear" class="form-control"><br>
+        <label for="right_ear">右耳</label><input type="text" id="right_ear" class="form-control"><br>
+        <label for="left_eye">左眼</label><input type="text" id="left_eye" class="form-control"><br>
+        <label for="right_eye">右眼</label><input type="text" id="right_eye" class="form-control"><br>
+        <label for="f_style">风格归属</label><select id="f_style">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+
+        <label for="f_set">归属集合</label><select id="f_set">
+        <option value="0">训练集</option>
+        <option value="1">测试集</option>
+        </select>
+        </div>
+    </div>
+    <div id="dataInput" class="col-md-8">
+        <label for="face">脸</label><div class="row" id="face">
+            <div id="face1" class="col-md-4">
+                <label for="face_size">小大</label><input type="text" id="face_size" class="form-control">
+            </div>
+            <div id="face2" class="col-md-4">
+                <label for="face_width">窄宽</label><input type="text" id="face_width" class="form-control">
+            </div>
+            <div id="face3" class="col-md-4">
+                <label for="face_shape">尖方</label><input type="text" id="face_shape" class="form-control">
+            </div>
+        </div><br>
+        <label for="eye">眼睛</label><div class="row" id="eye">
+            <div id="eye1" class="col-md-4">
+                <label for="eye_size">小大</label><input type="text" id="eye_size" class="form-control">
+            </div>
+            <div id="eye2" class="col-md-4">
+                <label for="eye_shape">细圆</label><input type="text" id="eye_shape" class="form-control">
+            </div>
+            <div id="eye3" class="col-md-4">
+                <label for="eye_length">短长</label><input type="text" id="eye_length" class="form-control">
+            </div>
+        </div><br>
+        <label for="nose">鼻子</label><div class="row" id="nose">
+            <div id="nose1" class="col-md-4">
+                <label for="nose_length">短长</label><input type="text" id="nose_length" class="form-control">
+            </div>
+            <div id="nose2" class="col-md-4">
+                <label for="nose_width">窄宽</label><input type="text" id="nose_width" class="form-control">
+            </div>
+        </div><br>
+        <label for="mouth">嘴唇</label><div class="row" id="mouth">
+            <div id="mouth1" class="col-md-4">
+                 <label for="mouth_thick">薄厚</label><input type="text" id="mouth_thick" class="form-control">
+            </div>
+            <div id="mouth2" class="col-md-4">
+                 <label for="mouth_width">窄宽</label><input type="text" id="mouth_width" class="form-control">
+              </div>
+        </div><br>
+        <label for="eye_dis">眼距</label><div class="row" id="eye_dis">
+            <div id="eye_dis1" class="col-md-4">
+                 <label for="eye_distance">窄宽</label><input type="text" id="eye_distance" class="form-control">
+            </div>
+        </div><br>
+        <label for="head">额头</label><div class="row" id="head">
+            <div id="head1" class="col-md-4">
+                 <label for="forehead">小大</label><input type="text" id="forehead" class="form-control">
+            </div>
+        </div><br>
+        <label for="f_f">五官比例</label><div class="row" id="f_f">
+        <div id="f_f1" class="col-md-4">
+            <label for="facial_feature">小大</label><input type="text" id="facial_feature" class="form-control">
+        </div><br>
+    </div>
+
+    </div>
+<input type="submit" class="btn-primary btn-large">
+</div>
+</form>
 </body>
 </html>
