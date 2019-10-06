@@ -4,25 +4,20 @@
     <meta charset="UTF-8">
     <title>数据录入</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!--script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js"--><!--/script-->
 </head>
 <body>
-<form action="http://www.deepbluecape.ink/glasses/back/insertData.php" method="post" role="form">
+<form action="http://deepbluecape.ink/glasses/back/insertData.php" method="post" role="form" enctype="multipart/form-data">
 <div class="row">
     <div id="photoUpload" class="col-md-4">
         <div class="form-group">
-        <input type="file" id="upLoadImage"><label for="upLoadImage">上传图片</label>
+            <label for="upLoadImage">上传图片</label><input type="file" name="file" id="upLoadImage">
     <!--留空的上传图片位---->
 
         <label for="left_ear">左耳</label><input type="text" id="left_ear" class="form-control"><br>
         <label for="right_ear">右耳</label><input type="text" id="right_ear" class="form-control"><br>
         <label for="left_eye">左眼</label><input type="text" id="left_eye" class="form-control"><br>
         <label for="right_eye">右眼</label><input type="text" id="right_eye" class="form-control"><br>
-        <label for="f_style">风格归属</label><select id="f_style">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        </select>
 
         <label for="f_set">归属集合</label><select id="f_set">
         <option value="0">训练集</option>
@@ -86,8 +81,9 @@
     </div>
 
     </div>
-<input type="submit" class="btn-primary btn-large">
+    <input type="submit" class="btn-primary btn-large" value="提交">
 </div>
 </form>
+
 </body>
 </html>
