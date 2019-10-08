@@ -40,27 +40,16 @@ window.onload = function init(){
 
     $("#upLoadImage").change(
         function uploadPhoto(evt){
-            var photo;
-            var photoW = canvas.width;
-            var photoH = canvas.height;
-
-            var fileInput = evt.target.file;
-            if(fileInput.length > 0){
-                //window url
-                var windowURL = window.URL || window.webkitURL;
-                //picture url
-                var picURL = windowURL.createObjectURL(fileInput[0]);
-
-                photo = new Image();
-                photo.src = picURL;
-                photo.onload = function() {
-                    //draw photo into canvas when ready
-                    ctx.drawImage(photo, 0, 0, photoW, photoH);
-                };
-                //释放picURL
-                var arr = picURL.split('/');
-                var imgUrl = arr[arr.length - 1];
-                windowURL.revokeObjectURL(imgUrl);
+            var file = document.querySelector('input[type=file]').files[0];// 获取选择的文件，这里是图片类型
+            var reader = new FileReader();
+            reader.readAsDataURL(file); //读取文件并将文件以URL的形式保存在resulr属性中 base64格式
+            reader.onload = function(e) { // 文件读取完成时触发
+                let result = e.target.result;
+                var image = new Image();
+                image.src = result;
+                image.onload = function(){
+                    ctx.drawImage(image, 0, 0, image.width, image.height)
+                }
             }
         }
     );

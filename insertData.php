@@ -1,7 +1,5 @@
 <?php
 header("content-Type: text/html; charset=utf-8");//字符编码设置
-header("HTTP/1.1 303 See Other");
-header("Location: $url");
 require_once'faces.php';
 require_once 'DBC.php';
 
@@ -45,8 +43,9 @@ function insertFace(){
 
         $fname_temp = $_FILES['file']['name'];
         $face->figName ="\" $fname_temp\"";
+        echo "test figName ".$face->figName;
         move_uploaded_file($_FILES["file"]["tmp_name"],
-            "fig/" . $_FILES["file"]["name"]);
+            "fig/faces/" . $_FILES["file"]["name"]);
     }
     return $face;
 }
@@ -64,7 +63,7 @@ if ($conn->connect_error) {
 $f = insertFace();
 $sql="insert `faces`(`figName`,`face_size`,`face_width`,`face_shape`,`eye_size`,`eye_shape`,`eye_length`,`nose_length`,`nose_width`,`mouth_thick`,`mouth_width`,`eye_distance`,`forehead`,`facial_feature`,`left_ear_x`,`right_ear_x`,`left_eye_x`,`right_eye_x`,`belong`,`left_ear_y`,`right_ear_y`,`left_eye_y`,`right_eye_y`) values("
     .$f->figName.",".$f->face_size.",".$f->face_width.",".$f->face_shape.",". $f->eye_size.",".$f->eye_shape.",".$f->eye_length.",".$f->nose_length.",".$f->nose_width.",".$f->mouth_thick.",".$f->mouth_width.",".$f->eye_distance.",".$f->forehead.",".$f->facial_feature.",".$f->left_ear_x.",".$f->right_ear_x.",".$f->left_eye_x.",".$f->right_eye_x.",".$f->f_set.",".$f->left_ear_y.",".$f->right_ear_y.",".$f->left_eye_y.",".$f->right_eye_y.");";
-echo $sql;
+
 $conn->query($sql);
 
 //
@@ -77,4 +76,4 @@ if($conn->affected_rows){
 $url = "http://www.deepbluecape.ink/glasses/uploadPhoto.html?res=".$res ;
 $conn->close();
 
-//echo "<script type=\"text/javascript\">window.location.href='$url'</script>";
+echo "<script type=\"text/javascript\">window.location.href='$url'</script>";
