@@ -1,9 +1,11 @@
 <?php
 header("content-Type: text/html; charset=utf-8");//字符编码设置
+header("HTTP/1.1 303 See Other");
+header("Location: $url");
 require_once'faces.php';
 require_once 'DBC.php';
 
-echo "test1";
+
 function insertFace(){
     $face = new faces();
 
@@ -12,13 +14,15 @@ function insertFace(){
         echo "错误: " . $_FILES["file"]["error"] . "<br />";
     }
     else {
-
         //眼镜图像匹配位置
-        $face->left_ear = $_POST['left_ear'];
-        $face->right_ear = $_POST['right_ear'];
-        $face->left_eye = $_POST['left_eye'];
-        $face->right_eye = $_POST['right_eye'];
-        $face->f_style = $_POST['f_style'];
+        $face->left_ear_x = $_POST['left_ear_x'];
+        $face->right_ear_x = $_POST['right_ear_x'];
+        $face->left_eye_x = $_POST['left_eye_x'];
+        $face->right_eye_x = $_POST['right_eye_x'];
+        $face->left_ear_y = $_POST['left_ear_y'];
+        $face->right_ear_y = $_POST['right_ear_y'];
+        $face->left_eye_y = $_POST['left_eye_y'];
+        $face->right_eye_y = $_POST['right_eye_y'];
         $face->f_set = $_POST['f_set'];
         //脸部参数
         $face->face_size = $_POST['face_size'];
@@ -37,11 +41,12 @@ function insertFace(){
         //零散参数
         $face->forehead = $_POST['forehead'];
         $face->facial_feature = $_POST['facial_feature'];
+        $face->eye_distance = $_POST['eye_distance'];
 
-        $face->figName = $_FILES['file']['name'];
-
+        $fname_temp = $_FILES['file']['name'];
+        $face->figName ="\" $fname_temp\"";
         move_uploaded_file($_FILES["file"]["tmp_name"],
-            "http://www.deepbluecape.ink/glasses/fig/" . $_FILES["file"]["name"]);
+            "fig/" . $_FILES["file"]["name"]);
     }
     return $face;
 }
@@ -55,17 +60,21 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-echo "test2";
-//预处理和绑定
-$f = new faces();
-$pre = $conn->prepare("insert `faces`(`face_size`,`face_width`,`face_shape`,`eye_size`,`eye_shape`,`eye_length`,`nose_length`,`nose_width`,`mouth_thick`,`mouth_width`,`eye_distance`,`forehead`,`facial_feature`,`left_ear`,`right_ear`,`left_eye`,`right_eye`,`belong`,`figName`)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
-$pre->bind_param("dddddddddddddddddis",$f->face_size,$f->face_width, $f->face_shape,$f->eye_size,$f->eye_shape,$f->eye_length,$f->nose_length,$f->nose_width,$f->mouth_thick,$f->mouth_width,$f->eye_distance,$f->forehead,$f->facial_feature,$f->left_ear,$f->right_ear,$f->left_eye,$f->right_eye,$f->f_set,$figName);
+//可以用预处理和绑定，但不是很必要
+$f = insertFace();
+$sql="insert `faces`(`figName`,`face_size`,`face_width`,`face_shape`,`eye_size`,`eye_shape`,`eye_length`,`nose_length`,`nose_width`,`mouth_thick`,`mouth_width`,`eye_distance`,`forehead`,`facial_feature`,`left_ear_x`,`right_ear_x`,`left_eye_x`,`right_eye_x`,`belong`,`left_ear_y`,`right_ear_y`,`left_eye_y`,`right_eye_y`) values("
+    .$f->figName.",".$f->face_size.",".$f->face_width.",".$f->face_shape.",". $f->eye_size.",".$f->eye_shape.",".$f->eye_length.",".$f->nose_length.",".$f->nose_width.",".$f->mouth_thick.",".$f->mouth_width.",".$f->eye_distance.",".$f->forehead.",".$f->facial_feature.",".$f->left_ear_x.",".$f->right_ear_x.",".$f->left_eye_x.",".$f->right_eye_x.",".$f->f_set.",".$f->left_ear_y.",".$f->right_ear_y.",".$f->left_eye_y.",".$f->right_eye_y.");";
+echo $sql;
+$conn->query($sql);
 
-$f_temp = insertFace();
+//
+if($conn->affected_rows){
+    $res = 1;//操作成功
+}else{
+    $res = 0;//操作失败
+}
 
-$result = $pre->execute();
-
-
-echo $result;//操作结果
-$pre->close();
+$url = "http://www.deepbluecape.ink/glasses/uploadPhoto.html?res=".$res ;
 $conn->close();
+
+//echo "<script type=\"text/javascript\">window.location.href='$url'</script>";
