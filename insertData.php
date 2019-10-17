@@ -13,12 +13,12 @@ function insertFace(){
     }
     else {
         //眼镜图像匹配位置
-        $face->left_ear_x = $_POST['left_ear_x'];
-        $face->right_ear_x = $_POST['right_ear_x'];
+        $face->left_ear_x = 0;//$_POST['left_ear_x'];修改了眼镜佩戴效果贴图算法，弃用该点
+        $face->right_ear_x = 0;//$_POST['right_ear_x'];
         $face->left_eye_x = $_POST['left_eye_x'];
         $face->right_eye_x = $_POST['right_eye_x'];
-        $face->left_ear_y = $_POST['left_ear_y'];
-        $face->right_ear_y = $_POST['right_ear_y'];
+        $face->left_ear_y = 0;//$_POST['left_ear_y'];
+        $face->right_ear_y = 0;//$_POST['right_ear_y'];
         $face->left_eye_y = $_POST['left_eye_y'];
         $face->right_eye_y = $_POST['right_eye_y'];
         $face->f_set = $_POST['f_set'];
@@ -42,7 +42,7 @@ function insertFace(){
         $face->eye_distance = $_POST['eye_distance'];
 
         $fname_temp = $_FILES['file']['name'];
-        $face->figName ="\" $fname_temp\"";
+        $face->figName ="\"$fname_temp\"";
         echo "test figName ".$face->figName;
         move_uploaded_file($_FILES["file"]["tmp_name"],
             "fig/faces/" . $_FILES["file"]["name"]);
@@ -63,7 +63,7 @@ if ($conn->connect_error) {
 $f = insertFace();
 $sql="insert `faces`(`figName`,`face_size`,`face_width`,`face_shape`,`eye_size`,`eye_shape`,`eye_length`,`nose_length`,`nose_width`,`mouth_thick`,`mouth_width`,`eye_distance`,`forehead`,`facial_feature`,`left_ear_x`,`right_ear_x`,`left_eye_x`,`right_eye_x`,`belong`,`left_ear_y`,`right_ear_y`,`left_eye_y`,`right_eye_y`) values("
     .$f->figName.",".$f->face_size.",".$f->face_width.",".$f->face_shape.",". $f->eye_size.",".$f->eye_shape.",".$f->eye_length.",".$f->nose_length.",".$f->nose_width.",".$f->mouth_thick.",".$f->mouth_width.",".$f->eye_distance.",".$f->forehead.",".$f->facial_feature.",".$f->left_ear_x.",".$f->right_ear_x.",".$f->left_eye_x.",".$f->right_eye_x.",".$f->f_set.",".$f->left_ear_y.",".$f->right_ear_y.",".$f->left_eye_y.",".$f->right_eye_y.");";
-
+//echo $sql;
 $conn->query($sql);
 
 //

@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 var res;
 var canvas;
 var ctx;

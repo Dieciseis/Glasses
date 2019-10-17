@@ -15,7 +15,7 @@
     <h1>Glasses</h1>.
 </div>
 <div class="container">
-    <form action="http://www.deepbluecape.ink/glasses/back/insertGlasses.php" method="post" role="form" enctype="multipart/form-data">
+    <form action="https://www.deepbluecape.ink/glasses/back/insertGlasses.php" method="post" role="form" enctype="multipart/form-data">
         <div class="row">
             <div id="photoUpload" class="col-md-4">
                 <div class="form-group">
@@ -59,7 +59,7 @@
                         <label for="reye2">Y:</label><input type="text" id="reye2" name="right_eye_y" class="form-control">
                     </div>
                 </div><br>
-                    <label for="f_set">归属集合</label><select id="f_set" name="f_set">
+                    <label for="g_set">归属集合</label><select id="g_set" name="g_set">
                     <option value="0">训练集</option>
                     <option value="1">测试集</option>
                 </select>
@@ -67,59 +67,55 @@
             </div>
 
             <div id="dataInput" class="col-md-8">
-                <label for="">脸</label><div class="row" id="face">
-                <div id="face1" class="col-md-2 col-md-offset-0" >
-                    <label for="face_size">小大</label><input type="text" id="face_size" name="face_size" class="form-control">
+                <label for="frame">镜框</label><div class="row" id="frame">
+                <div id="frame1" class="col-md-2 col-md-offset-0" >
+                    <label for="g_frame">参数1</label><input type="text" id="g_frame" name="g_frame" class="form-control">
                 </div>
-                <div id="face2" class="col-md-2 col-md-offset-1">
-                    <label for="face_width">窄宽</label><input type="text" id="face_width" name="face_width" class="form-control">
-                </div>
-                <div id="face3" class="col-md-2 col-md-offset-1">
-                    <label for="face_shape">尖方</label><input type="text" id="face_shape" name="face_shape" class="form-control">
-                </div>
+<!--                <div id="face2" class="col-md-2 col-md-offset-1">-->
+<!--                    <label for="face_width">窄宽</label><input type="text" id="face_width" name="face_width" class="form-control">-->
+<!--                </div>-->
+<!--                <div id="face3" class="col-md-2 col-md-offset-1">-->
+<!--                    <label for="face_shape">尖方</label><input type="text" id="face_shape" name="face_shape" class="form-control">-->
+<!--                </div>-->
             </div><br>
-                <label for="eye">眼睛</label><div class="row" id="eye">
-                <div id="eye1" class="col-md-2 col-md-offset-0">
-                    <label for="eye_size">小大</label><input type="text" id="eye_size" name="eye_size" class="form-control">
+                <label for="arm">镜腿</label><div class="row" id="arm">
+                <div id="arm1" class="col-md-2 col-md-offset-0">
+                    <label for="g_arm">参数2</label><input type="text" id="g_arm" name="g_arm" class="form-control">
                 </div>
-                <div id="eye2" class="col-md-2 col-md-offset-1">
-                    <label for="eye_shape">细圆</label><input type="text" id="eye_shape" name="eye_shape" class="form-control">
-                </div>
-                <div id="eye3" class="col-md-2 col-md-offset-1">
-                    <label for="eye_length">短长</label><input type="text" id="eye_length" name="eye_length" class="form-control">
-                </div>
+<!--                <div id="eye2" class="col-md-2 col-md-offset-1">-->
+<!--                    <label for="eye_shape">细圆</label><input type="text" id="eye_shape" name="eye_shape" class="form-control">-->
+<!--                </div>-->
+<!--                <div id="eye3" class="col-md-2 col-md-offset-1">-->
+<!--                    <label for="eye_length">短长</label><input type="text" id="eye_length" name="eye_length" class="form-control">-->
+<!--                </div>-->
             </div><br>
-                <label for="nose">鼻子</label><div class="row" id="nose">
-                <div id="nose1" class="col-md-2 col-md-offset-0">
-                    <label for="nose_length">短长</label><input type="text" id="nose_length" name="nose_length" class="form-control">
+                <label for="bridge">鼻梁</label><div class="row" id="bridge">
+                <div id="bridge1" class="col-md-2 col-md-offset-0">
+                    <label for="g_bridge">参数3</label><input type="text" id="g_bridge" name="g_bridge" class="form-control">
                 </div>
-                <div id="nose2" class="col-md-2 col-md-offset-1">
-                    <label for="nose_width">窄宽</label><input type="text" id="nose_width" name="nose_width" class="form-control">
-                </div>
+<!--                <div id="nose2" class="col-md-2 col-md-offset-1">-->
+<!--                    <label for="nose_width">窄宽</label><input type="text" id="nose_width" name="nose_width" class="form-control">-->
+<!--                </div>-->
             </div><br>
-                <label for="mouth">嘴唇</label><div class="row" id="mouth">
-                <div id="mouth1" class="col-md-2 col-md-offset-0">
-                    <label for="mouth_thick">薄厚</label><input type="text" id="mouth_thick" name="mouth_thick" class="form-control">
+                <label for="footwear">脚套</label><div class="row" id="footwear">
+                <div id="foorwear1" class="col-md-2 col-md-offset-0">
+                    <label for="g_footwear">参数4</label><input type="text" id="g_footwear" name="g_footwear" class="form-control">
                 </div>
-                <div id="mouth2" class="col-md-2 col-md-offset-1">
-                    <label for="mouth_width">窄宽</label><input type="text" id="mouth_width" name="mouth_width" class="form-control">
-                </div>
+<!--                <div id="mouth2" class="col-md-2 col-md-offset-1">-->
+<!--                    <label for="mouth_width">窄宽</label><input type="text" id="mouth_width" name="mouth_width" class="form-control">-->
+<!--                </div>-->
             </div><br>
-                <label for="eye_dis">眼距</label><div class="row" id="eye_dis">
-                <div id="eye_dis1" class="col-md-2 col-md-offset-0">
-                    <label for="eye_distance">窄宽</label><input type="text" id="eye_distance" name="eye_distance" class="form-control">
-                </div>
-            </div><br>
-                <label for="head">额头</label><div class="row" id="head">
-                <div id="head1" class="col-md-2 col-md-offset-0">
-                    <label for="forehead">小大</label><input type="text" id="forehead" name="forehead" class="form-control">
-                </div>
-            </div><br>
-                <label for="f_f">五官比例</label><div class="row" id="f_f">
-                <div id="f_f1" class="col-md-2 col-md-offset-0">
-                    <label for="facial_feature">小大</label><input type="text" id="facial_feature" name="facial_feature" class="form-control">
-                </div><br>
-            </div>
+                <label for="g_style">风格集合</label><select id="g_style" name="g_style">
+                <option value="0">休闲</option>
+                <option value="1">职业</option>
+                <option value="2">复杂</option>
+                <option value="3">简洁</option>
+                <option value="4">古典</option>
+                <option value="5">现代</option>
+                <option value="6">朴素</option>
+                <option value="7">时尚</option>
+
+            </select>
 
             </div>
         </div>
