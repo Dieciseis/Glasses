@@ -4,7 +4,7 @@ require_once ('DBC.php');
 
 $feature_data = array();
 $label = array();
-//方便测试的打印多维数组函数,打印一维数组会有问题
+//方便测试的打印多维数组函数,打印一维数组会有问题.可以用php自带var_dump()代替
 function printArray($a){
     $r = count($a);//行
     $c = count($a[0]);//列

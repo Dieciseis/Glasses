@@ -3,13 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <title>Glasses</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="http://www.deepbluecape.ink/glasses/glass.ico">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="/js/jquery-1.7.2.min.js"><\/script>')
+    </script>
+    <script type="text/javascript" src="upload.js"></script>
+    <script type="text/javascript" src="sendImg.js"></script>
 </head>
 <body>
 <div class="container">
-
-
-</div>
+    <div class="page-header">
+        <h1>Glasses</h1>
+    </div>
+    <div class="row">
+        <form id="form" action="http://www.deepbluecape.ink/glasses/back/getFaceInfo.php" method="post" role="form" target="showInfo">
+            <div id="photoUpload" class="col-md-4">
+                <div class="form-group">
+                    <label for="upLoadImage">上传图片</label>
+                    <canvas id="photo" width="300" height="300"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <div id="submitAll" class="row">
+                        <div class="col-md-2 col-md-offset-0">
+                            <input type="file" name="file" id="upLoadImage">
+                        </div>
+                        <div class="col-md-2 col-md-offset-5">
+                            <button type="button" class="btn btn-default" id="btn-upload" onclick="sendImage()">分析</button>
+                        </div>
+                    </div>
+                    <h5 id="marks">坐标：</h5>
+                    <h5 id="analyse_marks">识别坐标：</h5>
+                </div>
+            </div>
+            </form>
+        <div id="dataOutput" class="col-md-8">
+            <label for="face">脸</label><div class="row" id="face">
+            <div id="face1" class="col-md-2 col-md-offset-0" >
+                <label for="face_size">小大:</label><p id="p1"></p><input id="face_size" type="range" min="1" max="5" step="0.25" value="1" disabled="disabled"/>
+            </div>
+            <div id="face2" class="col-md-2 col-md-offset-1">
+                <label for="face_width">窄宽:</label><p id="p2"></p><input id="face_width" type="range" min="1" max="5" step="0.25" value="1" disabled="disabled"/>
+            </div>
+            <div id="face3" class="col-md-2 col-md-offset-1">
+                <label for="face_shape">尖方:</label><p id="p3"></p><input id="face_shape" type="range" min="1" max="5" step="0.25" value="1" disabled="disabled"/>
+            </div>
+        </div><br>
+            <label for="eye">眼睛</label><div class="row" id="eye">
+            <div id="eye1" class="col-md-2 col-md-offset-0">
+                <label for="eye_size">小大:</label><p id="p4"></p><input id="eye_size" type="range" min="1" max="5" step="0.25" value="1" disabled="disabled"/>
+            </div>
+            <div id="eye2" class="col-md-2 col-md-offset-1">
+                <label for="eye_shape">细圆:</label><p id="p5"></p><input id="eye_shape" type="range" min="1" max="5" step="0.25" value="1" disabled="disabled"/>
+            </div>
+            <div id="eye3" class="col-md-2 col-md-offset-1">
+                <label for="eye_length">短长:</label><p id="p6"></p><input id="eye_length" type="range" min="1" max="5" step="0.25" value="1" disabled="disabled"/>
+            </div>
+        </div><br>
+            <label for="nose">鼻子</label><div class="row" id="nose">
+            <div id="nose1" class="col-md-2 col-md-offset-0">
+                <label for="nose_length">短长:</label><p id="p7"></p><input id="nose_length" type="range" min="1" max="5" step="0.25" value="1" disabled="disabled"/>
+            </div>
+            <div id="nose2" class="col-md-2 col-md-offset-1">
+                <label for="nose_width">窄宽:</label><p id="p8"></p><input id="nose_width" type="range" min="1" max="5" step="0.25" value="1" disabled="disabled"/>
+            </div>
+        </div><br>
+            <label for="mouth">嘴唇</label><div class="row" id="mouth">
+            <div id="mouth1" class="col-md-2 col-md-offset-0">
+                <label for="mouth_thick">薄厚:</label><p id="p9"></p><input id="mouth_thick" type="range" min="1" max="5" step="0.25" value="1" disabled="disabled"/>
+            </div>
+            <div id="mouth2" class="col-md-2 col-md-offset-1">
+                <label for="mouth_width">窄宽:</label><p id="p10"></p><input id="mouth_width" type="range" min="1" max="5" step="0.25" value="1" disabled="disabled"/>
+            </div>
+        </div><br>
+            <div class="row">
+                <div id="eye_dis1" class="col-md-2 col-md-offset-0">
+                    <label for="eye_distance">眼距<br>窄宽:</label><p id="p11"></p><input id="eye_distance" type="range" min="1" max="5" step="0.25" value="1" disabled="disabled"/>
+                </div>
+                <div id="head1" class="col-md-2 col-md-offset-1">
+                    <label for="forehead">额头<br>小大:</label><p id="p12"></p><input id="forehead" type="range" min="1" max="5" step="0.25" value="1" disabled="disabled"/>
+                </div>
+                <div id="f_f1" class="col-md-2 col-md-offset-1">
+                    <label for="facial_feature">五官比例<br>紧凑分散:</label><p id="p13"></p><input id="facial_feature" type="range" min="1" max="5" step="0.25" value="1" disabled="disabled"/>
+                </div><br>
+            </div>
+        </div>
+        </div>
+    </div>
 </body>
 </html>
