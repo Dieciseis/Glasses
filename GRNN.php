@@ -19,7 +19,7 @@ function createDBC(){
         return $conn;
     }
 }
-
+//待修改，改为从人脸识别数据集到评价集
 function load_comm_data(){
     $conn = createDBC();
     global $feature_data;
@@ -88,4 +88,76 @@ function distance($X,$Y){
         }
         return sqrt($dis);
     }
+}
+
+function distance_mat($Nor_tran,$Nor_test){
+    $r = count($Nor_tran);
+    $c = count($Nor_tran[0]);
+    if($c != count($Nor_test[0])){
+        return -1;//异常
+    }else{
+        $Euclidean_D = array();
+        for($i = 0;$i<$r;$i++){
+            $Euclidean_D[$i] = distance($Nor_tran[$i],$Nor_test[0]);
+        }
+        return $Euclidean_D;
+    }
+}
+
+function Gauss($Euclidean_D,$sigma){
+    $r = count($Euclidean_D);
+    $Guass = array();
+    for($i = 0;$i < $r;$i++){
+        $Guass[$i] = exp(-$Euclidean_D[$i]/(2*square($sigma)));
+    }
+    return $Guass;
+}
+
+function sum_layer($Gauss,$label){
+    $r = count($label);
+    $c = count($Gauss);
+    $sumArray = array_fill(0,$c + 1,0);
+    if($c != count($label[0])){
+        return -1;
+    }else{
+        $sumArray[0] = array_sum($Gauss);
+        for($i = 1; $i < $c ;$i++){
+            for($j = 0;$j < $r ;$j++)
+            $sumArray[$i] += $Gauss[$j] * $label[$j][$i];
+        }
+        return $sumArray;
+    }
+}
+
+function output_layer($sum){
+    $c = count($sum);
+    $res = array_fill(0,$c -1,0);
+    for($i = 0;$i < $c;$i++){
+        $res[$i] = $sum[$i]/$sum[0];
+    }
+    return $sum;
+}
+
+function GRNN($tran,$test,$label){
+    $Nor_tran = Normalization($tran);
+
+    $Nor_test = Normalization($test);
+
+    $Euclidean_D = distance_mat($Nor_tran,$Nor_test);
+
+    $Gauss_mat = Gauss($Euclidean_D,0.1);
+
+    $sum = sum_layer($Gauss_mat,$label);
+
+    $comm = output_layer($sum);
+
+    return $comm;
+}
+
+function get_face_comm($test){
+    load_comm_data();//载入训练集
+    global $feature_data;
+    global $label;
+    $res = PNN($feature_data,$test,$label);
+    return $res;
 }

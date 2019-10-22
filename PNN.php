@@ -216,23 +216,17 @@ function class_result($Prob){
 
 function PNN($tran,$test,$label){
     $Nor_tran = Normalization($tran);
-    echo "<br>print Nor_tran<br>";
-    printArray($Nor_tran);
+
     $Nor_test = Normalization($test);
-    echo "<br>print Nor_test<br>";
-    printArray($Nor_test);
+
     $Euclidean_D = distance_mat($Nor_tran,$Nor_test);
-    echo "<br>print Euclidean_D<br>";
-    printSingleArray($Euclidean_D);
+
     $Gauss_mat = Gauss($Euclidean_D,0.1);
-    echo "<br>print Gauss_mat<br>";
-    printSingleArray($Gauss_mat);
+
     $prob = Prob_mat($Gauss_mat,$label);
-    echo "<br>print prob<br>";
-    printArray($prob);
+
     $predict = class_result($prob);
-    echo "<br>print predict<br>";
-    printSingleArray($predict);
+
     return $predict;
 }
 
