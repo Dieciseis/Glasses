@@ -74,30 +74,28 @@ window.onload = function init(){
                 var image1 = new Image();
                 image1.src = figUrl1;
                 image1.onload = function () {
-                    ctx.drawImage(image1, 0, 0, image1.width, image1.height);
+                    ctx.drawImage(image1, 0, 0, image1.width, image1.height,0,0,canvas.width,canvas.height);
                     drawn--;
                     //截取起始坐标和长宽
-                    var sx = glasses[0]*canvas.width;
-                    var sy = glasses[1]*canvas.height;
-                    var swidth = (glasses[2]-glasses[0])*canvas.width;
-                    var sheight = (glasses[3]-glasses[1])*canvas.height;
-                    //中心点
-                    var f_center_x = (face[4]+face[6])/2*canvas.width;
-                    var f_center_y = (face[5]+face[7])/2*canvas.height;
-                    //drawPlot(f_center_x,f_center_y);
-                    var glass_center_x = (glasses[4]+glasses[6])/2*canvas.width;
-                    var glass_center_y = (glasses[5]+glasses[7])/2*canvas.height;
-                    //drawPlot(glass_center_x,glass_center_y);
-                    //贴图起始坐标和长宽
-                    var x = f_center_x - (glass_center_x - sx);
-                    var y = f_center_y - (glass_center_y - sy);
-                    var width = (f_center_x - face[4])/(glass_center_x - glasses[4])*(glasses[2] - glasses[0])*canvas.width;
-                    var height = canvas.height * (glasses[2] - glasses[0]) * canvas.width/width * (glasses[3] - glasses[1]);//等比例缩放
-
-
                     var image2 = new Image();
                     image2.src = figUrl2;
                     image2.onload = function () {
+                        var sx = glasses[0]*canvas.width;
+                        var sy = glasses[1]*canvas.height;
+                        var swidth = (glasses[2]-glasses[0])*canvas.width;
+                        var sheight = (glasses[3]-glasses[1])*canvas.height;
+                        //中心点
+                        var f_center_x = (face[4]+face[6])/2*canvas.width;
+                        var f_center_y = (face[5]+face[7])/2*canvas.height;
+                        //drawPlot(f_center_x,f_center_y);
+                        var glass_center_x = (glasses[4]+glasses[6])/2*canvas.width;
+                        var glass_center_y = (glasses[5]+glasses[7])/2*canvas.height;
+                        //drawPlot(glass_center_x,glass_center_y);
+                        //贴图起始坐标和长宽
+                        var x = f_center_x - (glass_center_x - sx);
+                        var y = f_center_y - (glass_center_y - sy);
+                        var width = (f_center_x - face[4])/(glass_center_x - glasses[4])*(glasses[2] - glasses[0])*canvas.width;
+                        var height = canvas.height * (glasses[2] - glasses[0]) * canvas.width/width * (glasses[3] - glasses[1]);//等比例缩放
                         ctx.drawImage(image2, sx,sy,swidth,sheight,x,y,width,height);
                         drawn--;
                     };

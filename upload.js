@@ -48,7 +48,7 @@ window.onload = function init(){
                 var image = new Image();
                 image.src = result;
                 image.onload = function(){
-                    ctx.drawImage(image, 0, 0, image.width, image.height)
+                    ctx.drawImage(image, 0, 0, image.width, image.height,0,0,canvas.width,canvas.height);
                 }
             }
         }

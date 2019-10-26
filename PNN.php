@@ -250,14 +250,14 @@ function get_inverse_comm_Result($test){
 
 
 
-$test_tran = array(array(1,2,3,4,5,6),array(2,3,4,5,6,7),array(1,2,2,4,2,3));
-printArray($test_tran);
-$test_label = array(array(2),array(4),array(2));
-printArray($test_label);
-$test = array(array(1,2,2,4,1,4));
-printArray($test);
-$res  = PNN($test_tran,$test,$test_label);
-echo "<br>the result is ";
-printSingleArray($res);
+//$test_tran = array(array(1,2,3,4,5,6),array(2,3,4,5,6,7),array(1,2,2,4,2,3));
+//printArray($test_tran);
+//$test_label = array(array(2),array(4),array(2));
+//printArray($test_label);
+//$test = array(array(1,2,2,4,1,4));
+//printArray($test);
+//$res  = PNN($test_tran,$test,$test_label);
+//echo "<br>the result is ";
+//printSingleArray($res);
 
 

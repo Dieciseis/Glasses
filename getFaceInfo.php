@@ -66,26 +66,29 @@ $data = [
     "return_landmark" => "{$return_landmark}",
 ];
 
-//echo "alive after query";
-//$response = curlPost($url,$data);
-//var_dump($response);
+
+$response = curlPost($url,$data);
+$data = json_decode($response,1);
+
+$landmark = $data['faces'][0]["landmark"];
+var_dump($landmark);
 
 
 
-$sql = "SELECT `fid` ,`face_size`,`face_width` ,`face_shape` ,`eye_size`,`eye_shape` ,`eye_length` ,`nose_length` ,`nose_width` ,`mouth_thick` ,`mouth_width` ,`eye_distance` ,`forehead` ,`facial_feature`    from `faces` WHERE  `figName`= ".$figName_tmp.";";
-
-$result1 = $conn->query($sql);
-
-$arr = array();
-
-//输出每行数据
-while($row = $result1->fetch_assoc()) {
-   $count=count($row);//不能在循环语句中，由于每次删除row数组长度都减小
-   for($i=0;$i<$count;$i++){
-        unset($row[$i]);//删除冗余数据
-    }
-    array_push($arr,$row);
-}
-$conn->close();
-echo json_encode($arr,JSON_UNESCAPED_UNICODE);//json编码
-
+//$sql = "SELECT `fid` ,`face_size`,`face_width` ,`face_shape` ,`eye_size`,`eye_shape` ,`eye_length` ,`nose_length` ,`nose_width` ,`mouth_thick` ,`mouth_width` ,`eye_distance` ,`forehead` ,`facial_feature`    from `faces` WHERE  `figName`= ".$figName_tmp.";";
+//
+//$result1 = $conn->query($sql);
+//
+//$arr = array();
+//
+////输出每行数据
+//while($row = $result1->fetch_assoc()) {
+//   $count=count($row);//不能在循环语句中，由于每次删除row数组长度都减小
+//   for($i=0;$i<$count;$i++){
+//        unset($row[$i]);//删除冗余数据
+//    }
+//    array_push($arr,$row);
+//}
+//$conn->close();
+//echo json_encode($arr,JSON_UNESCAPED_UNICODE);//json编码
+//
