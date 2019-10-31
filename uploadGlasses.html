@@ -25,100 +25,83 @@
                     </canvas>
                     <input type="file" name="file" id="upLoadImage">
                     <h5 id="marks">坐标：</h5>
-                    <!--留空的上传图片位---->
+                </div>
+            </div>
 
-                    <label for="left_ear">左上</label><div id="left_ear" class="row">
-                    <div class="col-md-4 col-md-offset-0">
-                        <label for="lear1">X:</label><input type="text"  id="lear1" name="left_ear_x" class="form-control">
-                    </div>
-                    <div class="col-md-4 col-md-offset-1">
-                        <label for="lear2">Y:</label><input type="text"  id="lear2" name="left_ear_y" class="form-control">
-                    </div>
-                </div><br>
-                    <label for="right_ear">右下</label><div id="right_ear" class="row">
-                    <div class="col-md-4 col-md-offset-0">
-                        <label for="rear1">X:</label><input type="text" id="rear1" name="right_ear_x" class="form-control">
-                    </div>
-                    <div class="col-md-4 col-md-offset-1">
-                        <label for="rear2">Y:</label><input type="text" id="rear2" name="right_ear_y" class="form-control">
-                    </div>
-                </div><br>
-                    <label for="left_eye">左眼</label><div id="left_eye" class="row">
-                    <div class="col-md-4 col-md-offset-0">
-                        <label for="leye1">X:</label><input type="text" id="leye1" name="left_eye_x" class="form-control">
-                    </div>
-                    <div class="col-md-4 col-md-offset-1">
-                        <label for="leye2">Y:</label><input type="text" id="leye2" name="left_eye_y" class="form-control">
-                    </div>
-                </div><br>
-                    <label for="right_eye">右眼</label><div id="right_eye" class="row">
-                    <div class="col-md-4 col-md-offset-0">
-                        <label for="reye1">X:</label><input type="text" id="reye1" name="right_eye_x" class="form-control">
-                    </div>
-                    <div class="col-md-4 col-md-offset-1">
-                        <label for="reye2">Y:</label><input type="text" id="reye2" name="right_eye_y" class="form-control">
-                    </div>
-                </div><br>
-                    <label for="g_set">归属集合</label><select id="g_set" name="g_set">
-                    <option value="0">训练集</option>
-                    <option value="1">测试集</option>
+            <div id="dataInput" class="col-md-5">
+                <label for="left_ear">左上</label><div id="left_ear" class="row">
+                <div class="col-md-4 col-md-offset-0">
+                    <label for="lear1">X:</label><input type="text"  id="lear1" name="left_ear_x" class="form-control">
+                </div>
+                <div class="col-md-4 col-md-offset-1">
+                    <label for="lear2">Y:</label><input type="text"  id="lear2" name="left_ear_y" class="form-control">
+                </div>
+            </div><br>
+                <label for="right_ear">右下</label><div id="right_ear" class="row">
+                <div class="col-md-4 col-md-offset-0">
+                    <label for="rear1">X:</label><input type="text" id="rear1" name="right_ear_x" class="form-control">
+                </div>
+                <div class="col-md-4 col-md-offset-1">
+                    <label for="rear2">Y:</label><input type="text" id="rear2" name="right_ear_y" class="form-control">
+                </div>
+            </div><br>
+                <label for="left_eye">左眼</label><div id="left_eye" class="row">
+                <div class="col-md-4 col-md-offset-0">
+                    <label for="leye1">X:</label><input type="text" id="leye1" name="left_eye_x" class="form-control">
+                </div>
+                <div class="col-md-4 col-md-offset-1">
+                    <label for="leye2">Y:</label><input type="text" id="leye2" name="left_eye_y" class="form-control">
+                </div>
+            </div><br>
+                <label for="right_eye">右眼</label><div id="right_eye" class="row">
+                <div class="col-md-4 col-md-offset-0">
+                    <label for="reye1">X:</label><input type="text" id="reye1" name="right_eye_x" class="form-control">
+                </div>
+                <div class="col-md-4 col-md-offset-1">
+                    <label for="reye2">Y:</label><input type="text" id="reye2" name="right_eye_y" class="form-control">
+                </div>
+            </div><br>
+            </div>
+            <div id="designInput" class="col-md-2">
+                <br>
+                <div class="row">
+                <label for="frame_shape">镜框形状</label><select id="frame_shape" name="frame_shape">
+                <option value="0">方</option>
+                <option value="1">圆</option>
+                <option value="2">多边形</option>
+                 </select>
+                </div>
+                <br>
+                <div class="row">
+                    <label for="frame_thickness">镜框形状</label><select id="frame_thickness" name="frame_thickness">
+                    <option value="0">粗</option>
+                    <option value="1">细</option>
+                </select>
+                </div>
+                <br>
+                <div class="row">
+                    <label for="frame_type">镜框样式</label><select id="frame_type" name="frame_type">
+                    <option value="0">全框</option>
+                    <option value="1">半框</option>
+                    <option value="2">无框</option>
+                </select>
+                </div>
+                <br>
+                <div class="row">
+                    <label for="frame_width">镜框宽高比</label><select id="frame_width" name="frame_width">
+                    <option value="0">宽</option>
+                    <option value="1">高</option>
+                </select>
+                </div>
+                <br>
+                <div class="row">
+                    <label for="materials">镜框形状</label><select id="materials" name="materials">
+                    <option value="0">金属</option>
+                    <option value="1">塑料</option>
+                    <option value="2">结合</option>
                 </select>
                 </div>
             </div>
-
-            <div id="dataInput" class="col-md-6 col-md-offset-1">
-                <label for="frame">镜框</label><div class="row" id="frame">
-                <div id="frame1" class="col-md-2 col-md-offset-0" >
-                    <label for="g_frame">参数1</label><input type="text" id="g_frame" name="g_frame" class="form-control">
-                </div>
-<!--                <div id="face2" class="col-md-2 col-md-offset-1">-->
-<!--                    <label for="face_width">窄宽</label><input type="text" id="face_width" name="face_width" class="form-control">-->
-<!--                </div>-->
-<!--                <div id="face3" class="col-md-2 col-md-offset-1">-->
-<!--                    <label for="face_shape">尖方</label><input type="text" id="face_shape" name="face_shape" class="form-control">-->
-<!--                </div>-->
-            </div><br>
-                <label for="arm">镜腿</label><div class="row" id="arm">
-                <div id="arm1" class="col-md-2 col-md-offset-0">
-                    <label for="g_arm">参数2</label><input type="text" id="g_arm" name="g_arm" class="form-control">
-                </div>
-<!--                <div id="eye2" class="col-md-2 col-md-offset-1">-->
-<!--                    <label for="eye_shape">细圆</label><input type="text" id="eye_shape" name="eye_shape" class="form-control">-->
-<!--                </div>-->
-<!--                <div id="eye3" class="col-md-2 col-md-offset-1">-->
-<!--                    <label for="eye_length">短长</label><input type="text" id="eye_length" name="eye_length" class="form-control">-->
-<!--                </div>-->
-            </div><br>
-                <label for="bridge">鼻梁</label><div class="row" id="bridge">
-                <div id="bridge1" class="col-md-2 col-md-offset-0">
-                    <label for="g_bridge">参数3</label><input type="text" id="g_bridge" name="g_bridge" class="form-control">
-                </div>
-<!--                <div id="nose2" class="col-md-2 col-md-offset-1">-->
-<!--                    <label for="nose_width">窄宽</label><input type="text" id="nose_width" name="nose_width" class="form-control">-->
-<!--                </div>-->
-            </div><br>
-                <label for="footwear">脚套</label><div class="row" id="footwear">
-                <div id="foorwear1" class="col-md-2 col-md-offset-0">
-                    <label for="g_footwear">参数4</label><input type="text" id="g_footwear" name="g_footwear" class="form-control">
-                </div>
-<!--                <div id="mouth2" class="col-md-2 col-md-offset-1">-->
-<!--                    <label for="mouth_width">窄宽</label><input type="text" id="mouth_width" name="mouth_width" class="form-control">-->
-<!--                </div>-->
-            </div><br>
-                <label for="g_style">风格集合</label><select id="g_style" name="g_style">
-                <option value="0">休闲</option>
-                <option value="1">职业</option>
-                <option value="2">复杂</option>
-                <option value="3">简洁</option>
-                <option value="4">古典</option>
-                <option value="5">现代</option>
-                <option value="6">朴素</option>
-                <option value="7">时尚</option>
-
-            </select>
-
-            </div>
-        </div>
         <div id="submitAll" class="row">
             <div class="col-md-2 col-md-offset-5">
                 <input type="submit" class="btn-primary btn-large" value="提交">

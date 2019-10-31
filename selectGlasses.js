@@ -30,20 +30,16 @@ window.onload = function(){
                 if (xhr.responseText === false) {
                     alert("发生错误！");
                 } else {
+                    console.log(xhr.responseText);
                     var temp = "{\"data\":" + xhr.responseText + "}",//整合json数据
                         json = eval('(' + temp + ')');//也可使用 JSON.parse,注意格式
-                    console.log(json);
-                    face[0] = parseFloat(json.data[0].left_ear_x);
-                    face[1] = parseFloat(json.data[0].left_ear_y);
-                    face[2] = parseFloat(json.data[0].right_ear_x);
-                    face[3] = parseFloat(json.data[0].right_ear_y);
-                    face[4] = parseFloat(json.data[0].left_eye_x);
-                    face[5] = parseFloat(json.data[0].left_eye_y);
-                    face[6] = parseFloat(json.data[0].right_eye_x);
-                    face[7] = parseFloat(json.data[0].right_eye_y);
-                    console.log(face);
+                    face[0] = parseFloat(json.data[0].left_eye_x);
+                    face[1] = parseFloat(json.data[0].left_eye_y);
+                    face[2] = parseFloat(json.data[0].right_eye_x);
+                    face[3] = parseFloat(json.data[0].right_eye_y);
 
-                    figUrl1 = "back/fig/faces/" + json.data[0].figName;
+
+                    figUrl1 = "back/fig/face/" + json.data[0].figName;
                     drawn++;
                 }
             }
@@ -55,7 +51,6 @@ window.onload = function(){
                     drawn--;
                 }
             }
-
 
         }
     }

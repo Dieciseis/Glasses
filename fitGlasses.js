@@ -45,14 +45,10 @@ window.onload = function init(){
                     var temp = "{\"data\":" + xhr.responseText + "}",//整合json数据
                         json = eval('(' + temp + ')');//也可使用 JSON.parse,注意格式
                     console.log(json);
-                    face[0] = parseFloat(json.data[0].left_ear_x);
-                    face[1] = parseFloat(json.data[0].left_ear_y);
-                    face[2] = parseFloat(json.data[0].right_ear_x);
-                    face[3] = parseFloat(json.data[0].right_ear_y);
-                    face[4] = parseFloat(json.data[0].left_eye_x);
-                    face[5] = parseFloat(json.data[0].left_eye_y);
-                    face[6] = parseFloat(json.data[0].right_eye_x);
-                    face[7] = parseFloat(json.data[0].right_eye_y);
+                    face[0] = parseFloat(json.data[0].left_eye_x);
+                    face[1] = parseFloat(json.data[0].left_eye_y);
+                    face[2] = parseFloat(json.data[0].right_eye_x);
+                    face[3] = parseFloat(json.data[0].right_eye_y);
                     console.log(face);
 
                     glasses[0] = parseFloat(json.data[1].left_ear_x);
@@ -65,7 +61,7 @@ window.onload = function init(){
                     glasses[7] = parseFloat(json.data[1].right_eye_y);
                     console.log(glasses);
 
-                    figUrl1 = "back/fig/faces/" + json.data[0].figName;drawn++;
+                    figUrl1 = "back/fig/face/" + json.data[0].figName;drawn++;
                     figUrl2 = "back/fig/glasses/" + json.data[1].figName;drawn++;
                 }
             }
@@ -85,17 +81,20 @@ window.onload = function init(){
                         var swidth = (glasses[2]-glasses[0])*canvas.width;
                         var sheight = (glasses[3]-glasses[1])*canvas.height;
                         //中心点
-                        var f_center_x = (face[4]+face[6])/2*canvas.width;
-                        var f_center_y = (face[5]+face[7])/2*canvas.height;
-                        //drawPlot(f_center_x,f_center_y);
+                        var f_center_x = (face[0]+face[2])/2*canvas.width;
+                        var f_center_y = (face[1]+face[3])/2*canvas.height;
+                        console.log(f_center_x,f_center_y);
+
                         var glass_center_x = (glasses[4]+glasses[6])/2*canvas.width;
                         var glass_center_y = (glasses[5]+glasses[7])/2*canvas.height;
-                        //drawPlot(glass_center_x,glass_center_y);
+                        console.log(glass_center_x,glass_center_y);
+
                         //贴图起始坐标和长宽
-                        var x = f_center_x - (glass_center_x - sx);
-                        var y = f_center_y - (glass_center_y - sy);
-                        var width = (f_center_x - face[4])/(glass_center_x - glasses[4])*(glasses[2] - glasses[0])*canvas.width;
-                        var height = canvas.height * (glasses[2] - glasses[0]) * canvas.width/width * (glasses[3] - glasses[1]);//等比例缩放
+                        var width = 1.2* (f_center_x - face[0]*canvas.width)/(glass_center_x - glasses[4]*canvas.width)*(glasses[2] - glasses[0])*canvas.width;
+                        var height = canvas.height * (glasses[3] - glasses[1])* width / ((glasses[2] - glasses[0])* canvas.width) ;//等比例缩放
+                        var x = f_center_x - width/2;
+                        var y = f_center_y - height/2;
+
                         ctx.drawImage(image2, sx,sy,swidth,sheight,x,y,width,height);
                         drawn--;
                     };

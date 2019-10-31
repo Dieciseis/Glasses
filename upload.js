@@ -21,7 +21,8 @@ function getMousePos(canvas, event) {
     //2
     var x = Math.round((event.clientX - rect.left * (canvas.width / rect.width))/canvas.width*1000)/1000;
     var y = Math.round((event.clientY - rect.top * (canvas.height / rect.height))/canvas.height*1000)/1000;
-    document.getElementById("marks").innerHTML="坐标： X："+ x +" "+ "Y："+y;
+    if(x >= 0 && y >= 0)
+        document.getElementById("marks").innerHTML="坐标： X："+ x +" "+ "Y："+y;
 }
 
 

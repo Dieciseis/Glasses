@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8">  
     <title>Glasses</title>
     <link rel="icon" href="http://www.deepbluecape.ink/glasses/glass.ico">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -15,32 +15,32 @@
 <body>
 <div class="container">
     <div class="page-header">
-        <h1>Glasses</h1>
+        <h1 >Glasses</h1>
     </div>
     <div class="row">
         <form id="form" action="http://www.deepbluecape.ink/glasses/back/getFaceInfo.php" method="post" role="form" target="showInfo">
             <div id="photoUpload" class="col-md-5">
                 <div class="form-group">
-                    <label for="upLoadImage">上传图片</label>
+                    <label for="upLoadImage" style="color:white">上传图片</label>
                     <canvas id="photo" width="400" height="400"
-                            style="border:1px solid #000000;">
+                            style="border:1px solid white;">
                     </canvas>
                     <div id="submitAll" class="row">
                         <div class="col-md-2 col-md-offset-0">
                             <input type="file" name="file" id="upLoadImage">
                         </div>
                         <div class="col-md-2 col-md-offset-5">
-                            <button type="button" class="btn btn-default" id="btn-upload" onclick="sendImage()">分析</button>
-                            <button type="button" class="btn btn-default" id="btn-recommend">个性推荐</button><!--一个去selectGlasses.html的快捷入口，在本页上传过照片的话，会直接带过去-->
+                            <button type="button" class="btn btn-default" id="btn-upload" onclick="sendImage()" style="margin:0 0 10px 9px ">分析</button>
                         </div>
-                    </div><!--下面两行坐标是我调试用的，回头会删，不用修饰它们-->
-                    <h5 id="marks">坐标：</h5>
-                    <h5 id="analyse_marks">识别坐标：</h5>
+                    </div>
+                    <div class="row">
+                        <p id = "getRecommend"> </p>
+                    </div>
                 </div>
             </div>
             </form>
         <div id="dataOutput" class="col-md-7 col-offset-1">
-            <label for="face">脸</label><div class="row" id="face">
+            <label for="face" >脸</label><div class="row" id="face">
             <div id="face1" class="col-md-2 col-md-offset-0" >
                 <label for="face_size">小大:</label><p id="p1"></p><input id="face_size" type="range" min="1" max="5" step="0.25" value="1" disabled="disabled"/>
             </div>
@@ -93,4 +93,18 @@
         </div>
     </div>
 </body>
+<style>
+body{
+    background: url("https://wx1.sinaimg.cn/large/5306c1d3gy1g7pscocebyj21hc0mpdn8.jpg") no-repeat;  
+    background-attachment:fixed; 
+    background-size: cover; 
+} 
+label,h5,h1{
+    color:white;
+    opacity:0.6
+}
+button,input{
+    opacity:0.6
+}
+</style>
 </html>

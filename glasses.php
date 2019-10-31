@@ -3,10 +3,11 @@
 
 class glasses
 {
-    var $g_frame;
-    var $g_arm;
-    var $g_bridge;
-    var $g_footwear;
+    var $frame_shape;
+    var $frame_thickness;
+    var $frame_width;
+    var $frame_type;
+    var $materials;
 
     var  $left_ear_x;
     var  $right_ear_x;
@@ -17,7 +18,5 @@ class glasses
     var  $left_eye_y;
     var  $right_eye_y;
 
-    var $g_set;
-    var $g_style;
     var $figName;
 }

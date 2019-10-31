@@ -16,7 +16,7 @@ if($gid != null||$fid != null) {
     }
 
     //查面部数据
-    $sql1 = "SELECT `left_ear_x`,`left_ear_y`,`right_ear_x`,`right_ear_y`,`left_eye_x`,`left_eye_y`,`right_eye_x`,`right_eye_y`,`figName` FROM faces WHERE fid=" . $fid . ";";
+    $sql1 = "SELECT `left_eye_x`,`left_eye_y`,`right_eye_x`,`right_eye_y`,`figName` FROM faces WHERE fid=" . $fid . ";";
     //查眼镜数据
     $sql2 = "SELECT `left_ear_x`,`left_ear_y`,`right_ear_x`,`right_ear_y`,`left_eye_x`,`left_eye_y`,`right_eye_x`,`right_eye_y`,`figName` FROM glasses WHERE gid=" . $gid . ";";
 

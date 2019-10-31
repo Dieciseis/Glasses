@@ -52,32 +52,24 @@ function load_comm_data(){
     $feature_data = array();
     global $label;
     $label = array();
-    $tran_set= $conn->query("SELECT `fid`,`gid`,`style` FROM `face_with_glasses` where belong = 0;");
+    $tran_set= $conn->query("SELECT `fid`,`gid`,`style1`,`style2`,`style3`,`style4` FROM `face_with_glasses` where belong = 0;");
     while($row = mysqli_fetch_assoc($tran_set)) {
-//        echo"this row is ".$row["fid"];
-//        echo"<br>";
+
         global $feature_data;
         global $label;
         $faces = $conn->query("SELECT `face_size`,`face_width` ,`face_shape` ,`eye_size` ,`eye_shape` ,`eye_length` ,`nose_length` ,`nose_width` ,`mouth_thick` ,`mouth_width` ,`eye_distance` ,`forehead` ,`facial_feature`   FROM `faces` WHERE fid=".$row["fid"].";");
-        $glasses = $conn->query("SELECT `frame` ,`arm` ,`bridge` ,`footwear`   FROM `glasses` WHERE gid=".$row["gid"].";");
-//        echo "alive until sql";
-//        echo"<br>";
+        $glasses = $conn->query("SELECT `frame_shape` ,`frame_thickness` ,`frame_type` ,`frame_width`,`materials` FROM `glasses` WHERE gid=".$row["gid"].";");
+
         $rowf = mysqli_fetch_assoc($faces);
         $rowg = mysqli_fetch_assoc($glasses);
-//        echo "face size is ".$rowf["face_size"];
-//        echo"<br>";
-        $data = array($rowf["face_size"],$rowf["face_width"],$rowf["face_shape"],$rowf["eye_size"],$rowf["eye_shape"],$rowf["eye_length"],$rowf["nose_length"],$rowf["nose_width"],$rowf["mouth_thick"],$rowf["mouth_width"],$rowf["eye_distance"],$rowf["forehead"],$rowf["facial_feature"],$rowg["frame"],$rowg["arm"],$rowg["bridge"],$rowg["footwear"]);
-        $label_temp = array($row["style"]);
-//        echo "alive before push array<br>";
-//        echo "data[0] is".$data[0]."<br>";
+
+        $data = array($rowf["face_size"],$rowf["face_width"],$rowf["face_shape"],$rowf["eye_size"],$rowf["eye_shape"],$rowf["eye_length"],$rowf["nose_length"],$rowf["nose_width"],$rowf["mouth_thick"],$rowf["mouth_width"],$rowf["eye_distance"],$rowf["forehead"],$rowf["facial_feature"],$rowg["frame_shape"],$rowg["frame_thickness"],$rowg["frame_type"],$rowg["frame_width"],$rowg["materials"]);
+        $label_temp = array($row["style1"],$row["style2"],$row["style3"],$row["style4"]);
+
         array_push($feature_data,$data);
         array_push($label,$label_temp);
-//        echo "alive after push array<br>";
     }
     $conn->close();
-//    $one_set[] = $feature_data;
-//    $one_set[] = $label;
-//    return $one_set;
 }
 
 //反向评价载入训练集
@@ -92,13 +84,13 @@ function load_inverse_comm_data(){
         global $feature_data;
         global $label;
         $faces = $conn->query("SELECT `face_size`,`face_width` ,`face_shape` ,`eye_size` ,`eye_shape` ,`eye_length` ,`nose_length` ,`nose_width` ,`mouth_thick` ,`mouth_width` ,`eye_distance` ,`forehead` ,`facial_feature`   FROM `faces` WHERE fid=".$row["fid"].";");
-        $glasses = $conn->query("SELECT `frame` ,`arm` ,`bridge` ,`footwear`   FROM `glasses` WHERE gid=".$row["gid"].";");
+        $glasses = $conn->query("SELECT `frame_shape` ,`frame_width` ,`frame_thickness` ,`frame_width`,`materials`   FROM `glasses` WHERE gid=".$row["gid"].";");
 
         $rowf = mysqli_fetch_assoc($faces);
         $rowg = mysqli_fetch_assoc($glasses);
 
         $data = array($rowf["face_size"],$rowf["face_width"],$rowf["face_shape"],$rowf["eye_size"],$rowf["eye_shape"],$rowf["eye_length"],$rowf["nose_length"],$rowf["nose_width"],$rowf["mouth_thick"],$rowf["mouth_width"],$rowf["eye_distance"],$rowf["forehead"],$rowf["facial_feature"],$row["style"]);
-        $l_temp = array($rowg["frame"],$rowg["arm"],$rowg["bridge"],$rowg["footwear"]);
+        $l_temp = array($rowg["frame_shape"],$rowg["frame_width"],$rowg["frame_thickness"],$rowg["frame_width"],$rowg["materials"]);
         array_push($feature_data,$data);
         array_push($label,$l_temp);
     }
@@ -170,12 +162,12 @@ function Gauss($Euclidean_D,$sigma){
 
 //测试样本属于各类的概率
 function Prob_mat($Gauss_mat,$Label){
-    echo "test func prob_mat<br>";
     $label_type = count($Label[0]);
     $tran_total = count($Label);
     $label_type_g = count($Gauss_mat);
     if($tran_total != $label_type_g){
-        echo "error<br>";
+        echo "num of tran is ".$tran_total."<br>";
+        echo "num of label is ".$label_type_g."<br>";
         return -1;//error
     }else{//标签分类
         $Prob = array();
@@ -204,9 +196,10 @@ function class_result($Prob){
     for($i = 0; $i < $r; $i++){
         $cmp = 0;
         foreach ($Prob[$i] as $key => $value){
-            echo "key is ".$key." value is ".$value."<br>";
+
             if($value > $cmp){
-                $result[$i] = $key;
+                $result[$i]["style"] = $key;
+                $result[$i]["prob"] = $value;
                 $cmp = $value;
             }
         }
@@ -232,9 +225,9 @@ function PNN($tran,$test,$label){
 
 //正向评价预测测试样本标签
 function get_comm_Result($test){
-    load_comm_data();//载入训练集
     global $feature_data;
     global $label;
+    load_comm_data();//载入训练集
     $res = PNN($feature_data,$test,$label);
     return $res;
 }

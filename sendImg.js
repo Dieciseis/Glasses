@@ -1,4 +1,8 @@
 "use strict";
+var fid;
+function newWindow(){
+    window.open("selectGlasses.html?fid="+fid);
+}
 
 function sendImage() {
         var url = "http://www.deepbluecape.ink/glasses/back/getFaceInfo.php";
@@ -21,6 +25,7 @@ function sendImage() {
                     var temp = "{\"data\":" + xhr.responseText + "}",//整合json数据
                          json = eval('(' + temp + ')');//也可使用 JSON.parse,注意格式
                      console.log(json);
+                     fid = json.data[0].fid;
                      document.getElementById("face_size").value = json.data[0].face_size;
                      document.getElementById("p1").innerHTML = json.data[0].face_size;
                      document.getElementById("face_width").value = json.data[0].face_width;
@@ -47,6 +52,7 @@ function sendImage() {
                     document.getElementById("p12").innerHTML = json.data[0].forehead;
                      document.getElementById("facial_feature").value = json.data[0].facial_feature;
                     document.getElementById("p13").innerHTML = json.data[0].facial_feature;
+                    document.getElementById("getRecommend").innerHTML = "<button type=\"button\" class=\"btn btn-default\" onclick='newWindow()'>个性推荐</button>";
                 }
             }
         }
