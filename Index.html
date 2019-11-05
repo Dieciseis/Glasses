@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <p id = "getRecommend"> </p>
+                        <div id="getRecommend" class="col-md-2"> </div>
                     </div>
                 </div>
             </div>
@@ -95,7 +95,7 @@
 </body>
 <style>
 body{
-    background: url("https://wx1.sinaimg.cn/large/5306c1d3gy1g7pscocebyj21hc0mpdn8.jpg") no-repeat;  
+    background: url('./index.jpg') no-repeat;  
     background-attachment:fixed; 
     background-size: cover; 
 } 
@@ -106,5 +106,23 @@ label,h5,h1{
 button,input{
     opacity:0.6
 }
+
+input[type=range]{ 
+		 margin-top: 8px;
+	         outline: none; 
+		 -webkit-appearance: none;/*清除系统默认样式*/  
+		 width:70% !important;  
+		 background: -webkit-linear-gradient(#61bd12, #61bd12) no-repeat, #ddd;  
+	         background-size: 30% 100%;/*设置左右宽度比例*/  
+		height: 3px;/*横条的高度*/  
+}
+input[type=range]::-webkit-slider-thumb {  
+	 -webkit-appearance: none;/*清除系统默认样式*/  
+	height:16px;/*拖动块高度*/  
+        width: 16px;/*拖动块宽度*/  
+        background: #fff;/*拖动块背景*/  
+	border-radius: 50%; /*外观设置为圆形*/  
+	 border: solid 1px #ddd; /*设置边框*/  
+} 
 </style>
 </html>

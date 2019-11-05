@@ -41,6 +41,7 @@ if ($conn->connect_error) {
 
 $figName = $_FILES['file']['name'];
 $figName_tmp = "\"".$figName."\"";
+
 /*
 $fid = 0;
 $contour_top = array_fill(0,2,0);

@@ -198,8 +198,8 @@ function class_result($Prob){
         foreach ($Prob[$i] as $key => $value){
 
             if($value > $cmp){
-                $result[$i]["style"] = $key;
-                $result[$i]["prob"] = $value;
+                $result["style".($i+1)] = $key;
+                $result["prob".($i+1)] = $value;
                 $cmp = $value;
             }
         }
