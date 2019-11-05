@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+  <div id="app"  >
+    <button onclick="location.href='./Index.html'"><span>欢迎使用</span></button> 
+  </div>
+</body>
+  <!-- 先引入 Vue -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script> 
+    new Vue({
+      el: '#app',
+      data: function() {
+        return { visible: false }
+      }, 
+    })
+  </script>
+  <style>
+  body{
+    background-color:black;
+    background: url('./mainbg.png') no-repeat;  
+    background-attachment:fixed; 
+    background-size: cover; 
+}  button {
+            display: inline-block;
+            border-radius: 10px;
+            background: transparent;
+            border:1px solid #333300;
+            color: #333300;
+            text-align: center;
+            font-family: YouYuan;
+            font-size: 40px;
+            text-shadow:5px 5px 5px #222222;
+            transition: all 0.5s;
+            padding:5px;
+            cursor: pointer;
+            margin-left: 45%;
+            position:fixed;bottom:40%;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        }
+
+        button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        button span:after {
+            content: '»';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+        button:hover span {
+            padding-right: 25px;
+        }
+
+      button:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+  </style>
+</html>

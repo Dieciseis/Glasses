@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个性推荐</title>
+    <link rel="icon" href="http://www.deepbluecape.ink/glasses/glass.ico">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="/js/jquery-1.7.2.min.js"><\/script>')
+    </script>
+    <script src="selectGlasses.js"></script>
+</head>
+<body>
+<div class="container">
+<div class="page-header">
+    <h1>Glasses</h1>.
+</div>
+    <div class="row">
+        <div class="col-md-5">
+        <canvas id="photo" width="400" height="400"
+                style="border:1px solid white;">
+        </canvas><br>
+            <div class ="col-md-4 col-md-offset-3"><h5>预览效果</h5></div>
+        </div>
+        <div class="col-md-6 col-md-offset-0">
+            <div class="row">
+                <div class="col-md-2 col-md-offset-0">
+                <label for="style1">风格归属</label><select id="style1" name="style1"  >
+                <option value="0">全部</option>
+                <option value="1">合适</option>
+                <option value="2">不合适</option>
+                </select>
+                </div>
+                <div class="col-md-2 col-md-offset-0">
+                    <label for="style2">风格归属</label><select id="style2" name="style2"  >
+                    <option value="0">全部</option>
+                    <option value="1">复古</option>
+                    <option value="2">时尚</option>
+                </select>
+                </div>
+                <div class="col-md-2 col-md-offset-0">
+                    <label for="style3">风格归属</label><select id="style3" name="style3"  >
+                    <option value="0">全部</option>
+                    <option value="1">活泼</option>
+                    <option value="2">斯文</option>
+                </select>
+                </div>
+                <div class="col-md-2 col-md-offset-0">
+                    <label for="style4">风格归属</label><select id="style4" name="style4"  >
+                    <option value="0">全部</option>
+                    <option value="1">普通</option>
+                    <option value="2">个性</option>
+                </select>
+                </div>
+            </div>
+            <br><br>
+            <div class="row" id="showGlasses">
+                <!--通过js动态增加一个20*20大小的眼镜预览图和一行描述文字，一组放在一个div中，每组占col-md-3，满了自动换行-->
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+<style>
+body{
+    background: url('./select.jpg') no-repeat;  
+    background-attachment:fixed; 
+    background-size: cover; 
+} 
+h1,h5,label{
+    color:white;
+    opacity:0.6
+}
+select,option{
+    opacity:0.6
+} 
+select{  
+    background:#fafdfe;  
+    height:28px;  
+    width:80px;  
+    line-height:28px;  
+    border:1px solid #9bc0dd;  
+    -moz-border-radius:2px;  
+    -webkit-border-radius:2px;  
+    border-radius:2px;  
+} 
+</style>
+</html>
