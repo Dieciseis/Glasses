@@ -158,6 +158,6 @@ function get_face_comm($test){
     load_comm_data();//载入训练集
     global $feature_data;
     global $label;
-    $res = PNN($feature_data,$test,$label);
+    $res = GRNN($feature_data,$test,$label);
     return $res;
 }

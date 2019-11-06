@@ -256,6 +256,8 @@ $R[50]= abs(($landmark["left_eye_left_corner"]["y"] - $landmark["left_eye_right_
 //R52	嘴唇斜率	计算上嘴唇斜率
 $R[51]= abs(($landmark["mouth_upper_lip_left_contour1"]["y"]-$landmark["mouth_left_corner"]["y"])/($landmark["mouth_upper_lip_left_contour1"]["x"]-$landmark["mouth_left_corner"]["x"]));
 var_dump($R);
+
+
 */
 
 //  /*
