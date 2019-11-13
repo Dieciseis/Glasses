@@ -1,4 +1,5 @@
 "use strict";
+//上传图片并在预览框中显示的js，配合两没做进系统的信息录入页面用
 var res;
 var canvas;
 var ctx;

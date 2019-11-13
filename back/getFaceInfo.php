@@ -1,9 +1,13 @@
 <?php
+//对没有52项关联性指标数据的照片（未分析过）识别并入库，生成13项感性评价数据并返回前端（严格来说要把生成的13项感性评价数据也入库，但本项目已经有更可靠的13项感性评价数据了）
+//对已有52项关联性指标数据的照片（已分析过）直接查询13项感性评价数据并返回前端
+//返回数据格式：json格式，fid,13项评价
 header("content-Type: text/html; charset=utf-8");//字符编码设置
 require_once 'DBC.php';
 require_once 'call_API.php';
 require_once 'GRNN.php';
 
+//调detect API 用发请求函数
 function curlPost($url,$data){
     $ch = curl_init();
     //
@@ -41,7 +45,7 @@ $figName = $_FILES['file']['name'];
 $figName_tmp = "\"".$figName."\"";
 
 $contour_top = array_fill(0,2,0);
-$sql1 = "SELECT `fid` ,`contour_top_x` ,`contour_top_y`  from `faces` WHERE  `figName`= ".$figName_tmp.";";
+$sql1 = "SELECT `fid` ,`contour_top_x` ,`contour_top_y`  from `faces` WHERE  `figName`= ".$figName_tmp.";";//调用的API缺少额头上部识别点，用数据库中手动录入的点坐标代替了
 $result1 = $conn->query($sql1);
 $row = $result1->fetch_assoc();
 
@@ -57,15 +61,8 @@ $sql2 = "SELECT  *  from `face_point` WHERE  `fid`= ".$fid.";";
 $result2 =  $conn->query($sql2);
 $row = $result2->fetch_assoc();
 
-if($row == null){//查不到，需要计算R系列
+if($row == null){//face_point表中查不到，需要计算R系列
     $api = new call_API();
-    $img_url = "http://www.deepbluecape.ink/glasses/back/fig/faces/".$figName;
-    $data=[
-        'api_key'=> "-v4e-wr31tG1a-EYZQl0zYyFipmnzbK0" ,
-        'api_secret'=>"CYIVrLWH2Kcvu70ZXUIjmuT_7bm7Vijp",
-        'image_file' => new CURLFile(realpath($img_url)),
-        'return_landmark'=>1//1：83特征点。2:106特征点。0：不检测
-    ];
     $detect_api_url  ="https://api-cn.faceplusplus.com/facepp/v3/detect";
 
     //image_url
@@ -260,11 +257,13 @@ if($row == null){//查不到，需要计算R系列
     .$fid.",".$R[0].",".$R[1].",".$R[2].",".$R[3].",".$R[4].",".$R[5].",".$R[6].",".$R[7].",".$R[8].",".$R[9].",".$R[10].",".$R[11].",".$R[12].",".$R[13].",".$R[14].",".$R[15].",".$R[16].",".$R[17].",".$R[18].",".$R[19].",".$R[20].",".$R[21].",".$R[22].",".$R[23].",".$R[24].","
     .$R[25].",".$R[26].",".$R[27].",".$R[28].",".$R[29].",".$R[30].",".$R[31].",".$R[32].",".$R[33].",".$R[34].",".$R[35].",".$R[36].",".$R[37].",".$R[38].",".$R[39].",".$R[40].",".$R[41].",".$R[42].",".$R[43].",".$R[44].",".$R[45].",".$R[45].",".$R[47].",".$R[48].",".$R[49].",".$R[50].",".$R[51].");";
 
-    $conn->query($sql3);
+    $conn->query($sql3);//插入计算所得52项R数据
 
-    if($conn->affected_rows){
+    if($conn->affected_rows){//插入成功
+        $conn->close();//关闭数据库连接
+
         $test = array($R);//将R作为测试集
-        $res = get_face_comm($test);
+        $res = get_face_comm($test);//调用GRNN计算13项感性评价值
 
         $rply = array_fill(0,13,0);
         $rply["fid"] = sprintf("%.0f",$fid);
@@ -283,7 +282,7 @@ if($row == null){//查不到，需要计算R系列
         $rply["facial_feature"] = sprintf("%.3f",$res[12]);
         
         $arr = array();
-        $conn->close();
+        
         $count = count($rply);
         for($i=0;$i<$count;$i++){
             unset($rply[$i]);//删除冗余数据
@@ -292,8 +291,9 @@ if($row == null){//查不到，需要计算R系列
         echo json_encode($arr,JSON_UNESCAPED_UNICODE);//json编码
     }else{
         echo"error in insert R[]s !";
+        $conn->close();
     }
-}else{
+}else{//分析过，直接查faces表，返回13项感性数据指标
         $sql = "SELECT `fid` ,`face_size`,`face_width` ,`face_shape` ,`eye_size`,`eye_shape` ,`eye_length` ,`nose_length` ,`nose_width` ,`mouth_thick` ,`mouth_width` ,`eye_distance` ,`forehead` ,`facial_feature`    from `faces` WHERE  `figName`= ".$figName_tmp.";";
         $result1 = $conn->query($sql);
         $arr = array();
@@ -309,12 +309,3 @@ if($row == null){//查不到，需要计算R系列
     $conn->close();
     echo json_encode($arr,JSON_UNESCAPED_UNICODE);//json编码
 }
-
-
-
-
-
-//  /*
-
-
-// */

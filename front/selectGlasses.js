@@ -11,7 +11,7 @@ function getQueryString(name){
     if (r!=null) return r[2];else return'';
 }
 
-function fitGlasses(g){
+function fitGlasses(g){//实现佩戴效果贴图的函数，点击眼镜图片触发
     var face=[];//脸部坐标,0
     var glasses=[];//眼镜坐标,1
     var figUrl2;
@@ -20,7 +20,7 @@ function fitGlasses(g){
     canvas = document.getElementById("photo");
     ctx = canvas.getContext("2d");
 
-    var url = "http://www.deepbluecape.ink/glasses/back/fitData.php?fid=" + fid + "&gid=" + g;
+    var url = "http://www.deepbluecape.ink/glasses/back/fitData.php?fid=" + fid + "&gid=" + g;//请求贴图相关坐标
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url, true);
@@ -95,7 +95,7 @@ function fitGlasses(g){
     }
 }
 
-function changeCondition(json){
+function changeCondition(json){//改变筛选条件，重置推荐序列
     var style1 = document.getElementById("style1");
     var style2 = document.getElementById("style2");
     var style3 = document.getElementById("style3");
@@ -145,7 +145,7 @@ function changeCondition(json){
                 "</div>"
     }
     console.log(glasses);
-    document.getElementById("showGlasses").innerHTML = glasses;
+    document.getElementById("showGlasses").innerHTML = glasses;//插入眼镜推荐序列
 }
 
 window.onload = function(){
@@ -176,7 +176,7 @@ window.onload = function(){
                 image1.onload = function () {
                     ctx.drawImage(image1, 0, 0, image1.width, image1.height);
                     drawn--;
-                    var url = "http://www.deepbluecape.ink/glasses/back/selectGlasses.php?fid=" + fid;
+                    var url = "http://www.deepbluecape.ink/glasses/back/selectGlasses.php?fid=" + fid;//请求眼镜推荐序列
                     var xhr = new XMLHttpRequest();
                     xhr.open('POST', url, true);
                     xhr.send();

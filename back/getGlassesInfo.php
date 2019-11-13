@@ -1,4 +1,6 @@
 <?php
+//根据请求的gid查询眼镜设计要素数据
+//返回数据格式：json 
 header("content-Type: text/html; charset=utf-8");//字符编码设置
 require_once'DBC.php';
 

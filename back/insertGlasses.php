@@ -1,4 +1,5 @@
 <?php
+//接收前端录入的眼镜设计要素、贴图坐标等信息和上传的图片，入库
 header("content-Type: text/html; charset=utf-8");//字符编码设置
 require_once'glasses.php';
 require_once 'DBC.php';
@@ -21,7 +22,7 @@ function insertGlasses(){
         $glasses->right_ear_y = $_POST['right_ear_y'];
         $glasses->left_eye_y = $_POST['left_eye_y'];
         $glasses->right_eye_y = $_POST['right_eye_y'];
-        //参数
+        //设计要素参数
         $glasses->frame_shape = $_POST['frame_shape'];
         $glasses->frame_thickness = $_POST['frame_thickness'];
         $glasses->frame_type = $_POST['frame_type'];
@@ -31,7 +32,7 @@ function insertGlasses(){
         $fname_temp = $_FILES['file']['name'];
         $glasses->figName ="\"$fname_temp\"";
         move_uploaded_file($_FILES["file"]["tmp_name"],
-            "fig/glasses/" . $_FILES["file"]["name"]);
+            "fig/glasses/" . $_FILES["file"]["name"]);//图片存入服务器对应目录
     }
     return $glasses;
 }

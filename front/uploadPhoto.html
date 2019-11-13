@@ -8,7 +8,7 @@
     <script>
         window.jQuery || document.write('<script src="/js/jquery-1.7.2.min.js"><\/script>')
     </script>
-    <script type="text/javascript" src="upload.js"></script>
+    <script type="text/javascript" src="upload.js"></script><!--上传眼镜图片并显示，而且可以点击图片，获取与左上角（0,0）距离/图片长宽的百分比坐标-->
 </head>
 <body>
 <div class="page-header">
@@ -25,22 +25,6 @@
             </canvas>
             <input type="file" name="file" id="upLoadImage">
             <h5 id="marks">坐标：</h5>
-<!--            <label for="left_ear">左上</label><div id="left_ear" class="row">-->
-<!--                <div class="col-md-4 col-md-offset-0">-->
-<!--                    <label for="lear1">X:</label><input type="text"  id="lear1" name="left_ear_x" class="form-control">-->
-<!--                </div>-->
-<!--                <div class="col-md-4 col-md-offset-1">-->
-<!--                    <label for="lear2">Y:</label><input type="text"  id="lear2" name="left_ear_y" class="form-control">-->
-<!--                </div>-->
-<!--            </div><br>-->
-<!--            <label for="right_ear">右下</label><div id="right_ear" class="row">-->
-<!--                <div class="col-md-4 col-md-offset-0">-->
-<!--                    <label for="rear1">X:</label><input type="text" id="rear1" name="right_ear_x" class="form-control">-->
-<!--                </div>-->
-<!--                <div class="col-md-4 col-md-offset-1">-->
-<!--                    <label for="rear2">Y:</label><input type="text" id="rear2" name="right_ear_y" class="form-control">-->
-<!--                </div>-->
-<!--                </div><br>-->
             <label for="left_eye">左眼</label><div id="left_eye" class="row">
                 <div class="col-md-4 col-md-offset-0">
                     <label for="leye1">X:</label><input type="text" id="leye1" name="left_eye_x" class="form-control">

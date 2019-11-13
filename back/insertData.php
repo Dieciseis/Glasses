@@ -1,4 +1,5 @@
 <?php
+//接收前端录入的13项感性评价指标和上传的图片，入库
 header("content-Type: text/html; charset=utf-8");//字符编码设置
 require_once'faces.php';
 require_once 'DBC.php';
@@ -14,11 +15,11 @@ function insertFace(){
     else {
         //眼镜图像匹配位置
         $face->left_ear_x = 0;//$_POST['left_ear_x'];修改了眼镜佩戴效果贴图算法，弃用该点
-        $face->right_ear_x = 0;//$_POST['right_ear_x'];
+        $face->right_ear_x = 0;//$_POST['right_ear_x'];修改了眼镜佩戴效果贴图算法，弃用该点
         $face->left_eye_x = $_POST['left_eye_x'];
         $face->right_eye_x = $_POST['right_eye_x'];
-        $face->left_ear_y = 0;//$_POST['left_ear_y'];
-        $face->right_ear_y = 0;//$_POST['right_ear_y'];
+        $face->left_ear_y = 0;//$_POST['left_ear_y'];修改了眼镜佩戴效果贴图算法，弃用该点
+        $face->right_ear_y = 0;//$_POST['right_ear_y'];修改了眼镜佩戴效果贴图算法，弃用该点
         $face->left_eye_y = $_POST['left_eye_y'];
         $face->right_eye_y = $_POST['right_eye_y'];
         $face->f_set = $_POST['f_set'];
@@ -44,7 +45,7 @@ function insertFace(){
         $fname_temp = $_FILES['file']['name'];
         $face->figName ="\"$fname_temp\"";
         move_uploaded_file($_FILES["file"]["tmp_name"],
-            "fig/face/" . $_FILES["file"]["name"]);
+            "fig/face/" . $_FILES["file"]["name"]);//图片存入服务器对应目录
     }
     return $face;
 }
@@ -75,4 +76,4 @@ if($conn->affected_rows){
 $url = "http://www.deepbluecape.ink/glasses/uploadPhoto.html?res=".$res ;
 $conn->close();
 
-echo "<script type=\"text/javascript\">window.location.href='$url'</script>";
+echo "<script type=\"text/javascript\">window.location.href='$url'</script>";//重载录入页面，显示上一次录入结果

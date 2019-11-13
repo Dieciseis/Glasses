@@ -1,6 +1,7 @@
 <?php
 header("content-Type: text/html; charset=utf-8");//字符编码设置
-
+//根据请求的fid和gid，返回对应人脸和眼镜佩戴效果需要的坐标数据。
+//返回数据格式：json格式的数组，每行数据包含人脸X1,Y1,X2,Y2,眼镜X1,Y1,X2,Y2,X3,Y3,X4,Y4（只有一行，前端解析返回数据第一行即可）
 require_once'DBC.php';
 $db = new DBC;
 

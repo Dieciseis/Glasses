@@ -1,10 +1,12 @@
 <?php
 header("content-Type: text/html; charset=utf-8");//字符编码设置
 require_once ('DBC.php');
+//通过数据库中已有的52项关联性指标和对应的13项感性评价指标，预测测试集的52项关联性指标对应的13项感性评价指标
 
 $feature_data = array();
 $label = array();
 
+//平方函数
 function square($s){
     return $s * $s;
 }
@@ -19,7 +21,8 @@ function createDBC(){
         return $conn;
     }
 }
-//将有13项感性评价的52项人脸特征关联性指标作为训练集载入，将13项感性评价作为标签
+
+//将有13项感性评价的52项人脸特征关联性指标作为训练集载入，13项感性评价作为标签
 function load_comm_data(){
     $conn = createDBC();
     global $feature_data;
@@ -28,34 +31,27 @@ function load_comm_data(){
     $label = array();
     $tran_set= $conn->query("SELECT * FROM `face_point` where fid in (SELECT fid from `faces`);");//查询有13项感性指标的52项人脸特征关联性数据，每行一组52项指标数据
     while($row = mysqli_fetch_assoc($tran_set)) {
-//      echo"this row is ".$row["fid"];
-//      echo"<br>";
         global $feature_data;
         global $label;
         $faces = $conn->query("SELECT `face_size`,`face_width` ,`face_shape` ,`eye_size` ,`eye_shape` ,`eye_length` ,`nose_length` ,`nose_width` ,`mouth_thick` ,`mouth_width` ,`eye_distance` ,`forehead` ,`facial_feature`   FROM `faces` WHERE fid=".$row["fid"].";");
        
         $rowf = mysqli_fetch_assoc($faces);
-//        echo "face size is ".$rowf["face_size"];
-//        echo"<br>";
+
         $data = array($row["R0"],$row["R1"],$row["R2"],$row["R3"],$row["R4"],$row["R5"],$row["R6"],$row["R7"],$row["R8"],$row["R9"],$row["R10"],$row["R11"],$row["R12"],$row["R13"],$row["R14"]
         ,$row["R15"],$row["R16"],$row["R17"],$row["R18"],$row["R19"],$row["R20"],$row["R21"],$row["R22"],$row["R23"],$row["R24"],$row["R25"],$row["R26"],$row["R27"],$row["R28"]
         ,$row["R29"],$row["R30"],$row["R31"],$row["R32"],$row["R33"],$row["R34"],$row["R35"],$row["R36"],$row["R37"],$row["R38"],$row["R39"],$row["R40"],$row["R41"],$row["R42"]
         ,$row["R43"],$row["R44"],$row["R45"],$row["R46"],$row["R47"],$row["R48"],$row["R49"],$row["R50"],$row["R51"]);
         $label_temp = array($rowf["face_size"],$rowf["face_width"],$rowf["face_shape"],$rowf["eye_size"],$rowf["eye_shape"],$rowf["eye_length"],$rowf["nose_length"],$rowf["nose_width"],$rowf["mouth_thick"],$rowf["mouth_width"],$rowf["eye_distance"],$rowf["forehead"],$rowf["facial_feature"]);
-//        echo "alive before push array<br>";
-//        echo "data[0] is".$data[0]."<br>";
+
         array_push($feature_data,$data);
         array_push($label,$label_temp);
-//        echo "alive after push array<br>";
+
     }
     $conn->close();
-    // var_dump($label);
-//    $one_set[] = $feature_data;
-//    $one_set[] = $label;
-//    return $one_set;
+    
 }
 
-function Normalization($data){
+function Normalization($data){//归一化
     $r = count($data);//行
     $c = count($data[0]);//列
     $Nor_feature = array();
@@ -114,7 +110,7 @@ function Gauss($Euclidean_D,$sigma){
     return $Guass;
 }
 
-function sum_layer($Gauss,$label){
+function sum_layer($Gauss,$label){//求和层
     $r = count($label);
     $c = count($label[0]);
     $r_Gauss = count($Gauss);
@@ -131,7 +127,7 @@ function sum_layer($Gauss,$label){
     }
 }
 
-function output_layer($sum){
+function output_layer($sum){//输出层
     $c = count($sum);
     $res = array_fill(0,$c-1,0);
     for($i = 1;$i < $c;$i++){
@@ -143,23 +139,17 @@ function output_layer($sum){
 
 function GRNN($tran,$test,$label){
     $Nor_tran = Normalization($tran);
-    // echo"tran<br>";//检查各矩阵是否正确的测试用代码
-    // var_dump($Nor_tran);
+    
     $Nor_test = Normalization($test);
-    // echo"test<br>";//检查各矩阵是否正确的测试用代码
-    // var_dump($Nor_test);
+    
     $Euclidean_D = distance_mat($Nor_tran,$Nor_test);
-    // echo"Euclidiean_D<br>";//检查各矩阵是否正确的测试用代码
-    // var_dump($Euclidean_D);
+    
     $Gauss_mat = Gauss($Euclidean_D,0.1);
-    // echo"Gauss<br>";//检查各矩阵是否正确的测试用代码
-    // var_dump($Gauss_mat);
+    
     $sum = sum_layer($Gauss_mat,$label);
-    // echo"sum<br>";//检查各矩阵是否正确的测试用代码
-    // var_dump($sum);
+    
     $comm = output_layer($sum);
-    // echo"comm<br>";//检查各矩阵是否正确的测试用代码
-    // var_dump($comm);
+    
     return $comm;
 }
 

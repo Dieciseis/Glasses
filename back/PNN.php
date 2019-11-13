@@ -1,9 +1,12 @@
 <?php
+//正向评价：根据13项感性评价指标，5项眼镜设计要素（作为训练集）和face_with_glasses表中的风格评价（作为标签）样本，预测测试集13项评价指标对应的风格评价
+//反向评价：根据13项感性评价指标，face_with_glasses表中的风格评价（作为训练集）和5项眼镜设计要素（作为标签）样本，预测5项眼镜设计要素取值
+
 header("content-Type: text/html; charset=utf-8");//字符编码设置
 require_once ('DBC.php');
 
-$feature_data = array();
-$label = array();
+$feature_data = array();//训练集数据
+$label = array();//标签
 //方便测试的打印多维数组函数,打印一维数组会有问题.可以用php自带var_dump()代替
 function printArray($a){
     $r = count($a);//行
@@ -45,7 +48,7 @@ function createDBC(){
     }
 }
 
-//正向评价载入训练集
+//正向评价载入训练集，拼接13项感性评价和5项设计要素为一行训练集数据，风格评价作为标签
 function load_comm_data(){
     $conn = createDBC();
     global $feature_data;
@@ -72,14 +75,14 @@ function load_comm_data(){
     $conn->close();
 }
 
-//反向评价载入训练集
+//反向评价载入训练集，拼接13项感性评价和4项风格评价为一行训练集数据，眼镜设计要素作为标签
 function load_inverse_comm_data(){
     $conn = createDBC();
     global $feature_data;
     $feature_data = array();
     global $label;
     $label = array();
-    $tran_set= $conn->query("SELECT `fid`,`gid`,`style` FROM `face_with_glasses` where belong = 0;");
+    $tran_set= $conn->query("SELECT `fid`,`gid`,`style1`,`style2`,`style3`,`style4` FROM `face_with_glasses` where belong = 0;");
     while($row = mysqli_fetch_assoc($tran_set)) {
         global $feature_data;
         global $label;
@@ -89,7 +92,7 @@ function load_inverse_comm_data(){
         $rowf = mysqli_fetch_assoc($faces);
         $rowg = mysqli_fetch_assoc($glasses);
 
-        $data = array($rowf["face_size"],$rowf["face_width"],$rowf["face_shape"],$rowf["eye_size"],$rowf["eye_shape"],$rowf["eye_length"],$rowf["nose_length"],$rowf["nose_width"],$rowf["mouth_thick"],$rowf["mouth_width"],$rowf["eye_distance"],$rowf["forehead"],$rowf["facial_feature"],$row["style"]);
+        $data = array($rowf["face_size"],$rowf["face_width"],$rowf["face_shape"],$rowf["eye_size"],$rowf["eye_shape"],$rowf["eye_length"],$rowf["nose_length"],$rowf["nose_width"],$rowf["mouth_thick"],$rowf["mouth_width"],$rowf["eye_distance"],$rowf["forehead"],$rowf["facial_feature"],$row["style1"],$row["style2"],$row["style3"],$row["style4"]);
         $l_temp = array($rowg["frame_shape"],$rowg["frame_width"],$rowg["frame_thickness"],$rowg["frame_width"],$rowg["materials"]);
         array_push($feature_data,$data);
         array_push($label,$l_temp);

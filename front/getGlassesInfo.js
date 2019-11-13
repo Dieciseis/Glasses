@@ -1,14 +1,15 @@
 "use strict";
-function getQueryString(name){
+//向服务器请求眼镜图片和设计要素信息，接收服务器返回值并解析，显示在页面中
+function getQueryString(name){//取网页链接请求参数的函数
     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if (r!=null) return r[2];else return'';
 }
 
-window.onload = function(){
+window.onload = function(){//页面载入时触发
     var gid = getQueryString('gid');
     if(gid !== ' ') {
-        var url = "http://www.deepbluecape.ink/glasses/back/getGlassesInfo.php?gid=" + gid;//请求人脸照片名
+        var url = "http://www.deepbluecape.ink/glasses/back/getGlassesInfo.php?gid=" + gid;//请求眼镜信息
         var xhr = new XMLHttpRequest();
         xhr.open('POST', url, true);
         xhr.send();

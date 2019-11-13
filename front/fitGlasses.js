@@ -1,4 +1,6 @@
 "use strict";
+//实现佩戴效果贴图的测试用js，配合testShow.html，仅做佩戴效果展示。
+//在selectGlasses.js中又写了一遍。
 
 var face=[];//脸部坐标,0
 var glasses=[];//眼镜坐标,1
@@ -16,7 +18,7 @@ function drawPlot(x,y){
     ctx.fill();
 }
 
-function getQueryString(name){
+function getQueryString(name){//取网页链接请求参数的函数
     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if (r!=null) return r[2];else return'';

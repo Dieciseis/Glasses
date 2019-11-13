@@ -5,7 +5,7 @@ function newWindow(){
 }
 
 function sendImage() {
-        var url = "http://www.deepbluecape.ink/glasses/back/getFaceInfo.php";
+        var url = "http://www.deepbluecape.ink/glasses/back/getFaceInfo.php";//请求13项人脸感性评价数据
         var input = document.querySelector("#upLoadImage");
 
         var formData = new FormData();
